@@ -7,11 +7,11 @@ const reader = readline.createInterface({
 
 // Write this first.
 function askIfGreaterThan(el1, el2, callback) {
-    reader.question("Is the first number greater than the second number?", function(answer){
+    reader.question(`Is ${el1} greater than ${el2}?`, function(answer){
         if (answer === "yes") {
-            callback 
+           callback(true)
         } else {
-            !callback
+            callback(false)
         }
     })
     // Prompt user to tell us whether el1 > el2; pass true back to the
@@ -21,7 +21,19 @@ function askIfGreaterThan(el1, el2, callback) {
 // Once you're done testing askIfGreaterThan with dummy arguments, write this.
 function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
     // Do an "async loop":
-    // 1. If (i == arr.length - 1), call outerBubbleSortLoop, letting it
+    if (i == arr.length - 1) {
+        return outerBubbleSortLoop(madeAnySwaps)
+    }
+        
+    askIfGreaterThan(el1, el2, () => isGreaterThan) {
+        //true, swap the elements, once swapped, then make madeAnySwap = true 
+
+    }
+
+    //recursively call innerbubblesort loop i + 1 
+
+    
+            // 1. If (i == arr.length - 1), call outerBubbleSortLoop, letting it
     //    know whether any swap was made.
     // 2. Else, use `askIfGreaterThan` to compare `arr[i]` and `arr[i +
     //    1]`. Swap if necessary. Call `innerBubbleSortLoop` again to
@@ -36,8 +48,13 @@ function absurdBubbleSort(arr, sortCompletionCallback) {
     function outerBubbleSortLoop(madeAnySwaps) {
         // Begin an inner loop if you made any swaps. Otherwise, call
         // `sortCompletionCallback`.
+        if (madeAnySwaps){
+            innerBubbleSortLoop(arr, 0, false, outerBubbleSortLoop);
+        } else {
+            sortCompletionCallback(arr);
+        }
     }
-
+        outerBubbleSortLoop(true);
     // Kick the first outer loop off, starting `madeAnySwaps` as true.
 }
 
@@ -45,3 +62,4 @@ absurdBubbleSort([3, 2, 1], function (arr) {
     console.log("Sorted array: " + JSON.stringify(arr));
     reader.close();
 });
+
