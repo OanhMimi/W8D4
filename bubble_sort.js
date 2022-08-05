@@ -7,7 +7,7 @@ const reader = readline.createInterface({
 
 // Write this first.
 function askIfGreaterThan(el1, el2, callback) {
-    reader.question(`Is ${el1} greater than ${el2}?`, function(answer){
+    reader.question(`Is ${el1} greater than ${el2}? `, function(answer){
         if (answer === "yes") {
            callback(true)
         } else {
@@ -21,15 +21,21 @@ function askIfGreaterThan(el1, el2, callback) {
 // Once you're done testing askIfGreaterThan with dummy arguments, write this.
 function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
     // Do an "async loop":
-    if (i == arr.length - 1) {
-        return outerBubbleSortLoop(madeAnySwaps)
+    if (i === (arr.length - 1)) { //if we reach the end of the arr 
+        return outerBubbleSortLoop(madeAnySwaps);
     }
-        
-    askIfGreaterThan(el1, el2, () => isGreaterThan) {
+    
+    
+    askIfGreaterThan(arr[i], arr[i+1], function(banana) { //ES6 way is (banana => )
+    if (banana) {
         //true, swap the elements, once swapped, then make madeAnySwap = true 
+        [arr[i],arr[i+1]] = [arr[i+1],arr[i]];
+        madeAnySwaps = true;
+    }
+    innerBubbleSortLoop(arr, i+1, madeAnySwaps, outerBubbleSortLoop);
+    })
 
     }
-
     //recursively call innerbubblesort loop i + 1 
 
     
@@ -39,7 +45,7 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
     //    1]`. Swap if necessary. Call `innerBubbleSortLoop` again to
     //    continue the inner loop. You'll want to increment i for the
     //    next call, and possibly switch madeAnySwaps if you did swap.
-}
+
 
 // Once you're done testing innerBubbleSortLoop, write outerBubbleSortLoop.
 // Once you're done testing outerBubbleSortLoop, write absurdBubbleSort.
