@@ -13,9 +13,16 @@ const turnOn = function () {
 const lamp = new Lamp();
 
 
-Function.prototype.myBind = function (context) {
-    return () => this.apply(context);
-};
+// Function.prototype.myBind = function (context) {
+//     return () => this.apply(context);
+// };
+
+Function.prototype.myBind = function(context){   //puppy.bark.myBind(kitty)
+    let that = this;
+    return function (){
+        return that.apply(context); //if the specs says take in an array, use apply, if comma, use call
+    }
+}
 
 const boundTurnOn = turnOn.bind(lamp);
 const myBoundTurnOn = turnOn.myBind(lamp);
